@@ -1,0 +1,57 @@
+<document xmlns="http://cnx.rice.edu/cnxml">
+	<title>Code for Voice Conversion</title>
+	<metadata xmlns:md="http://cnx.rice.edu/mdml">
+  <md:content-id>m12477</md:content-id>
+  <md:title>Code for Voice Conversion</md:title>
+  <md:abstract>The MATLAB and Praat code files for performing voice conversion.</md:abstract>
+  <md:uuid>22a093c4-5ad9-4161-ae5c-1d7fc3f258da</md:uuid>
+</metadata>
+
+<content>
+		<list id="code"><title>Praat and MATLAB Code Files for Voice Converstion</title><item>
+				<link url="ursula.pratt">ursula.praat</link> - The Praat code to convert windowed source files into the corresponding windowed filter files. (Named after the antagonist of "The Little Mermaid", who imitates voices.)
+</item>
+			<item>
+				<link url="add_wav.m">add_wav.m</link> - Adds the sound data to the wav array.
+</item>
+			<item>
+				<link url="convert_voice.m">convert_voice.m</link> - Coverts the voice of the source to that of the filter.
+</item>
+			<item>
+				<link url="example_plot.m">example_plot.m</link> - Plots example cepstrums.
+</item>
+			<item>
+				<link url="get_mins.m">get_mins.m</link> - Obtains a rough list of minimums in a signal.
+</item>
+			<item>
+				<link url="get_word_breaks.m">get_word_breaks.m</link> - Gets the position of the spaces in the speech signal.
+</item>
+			<item>
+				<link url="load_wav.m">load_wav.m</link> - Loads the specified wav file.
+</item>
+			<item>
+				<link url="load_wavs.m">load_wavs.m</link> - Loads all wavs in the current directory.
+</item>
+			<item>
+				<link url="plot_cepstrum.m">plot_cepstrum.m</link> - Plots the cepstrum of the signal.
+</item>
+			<item>
+				<link url="plot_contour.m">plot_contour.m</link> - Plots the signal, its absolute value, and its contour.
+</item>
+			<item>
+				<link url="save_chunks.m">save_chunks.m</link> - Saves segments of the source and filter files.
+</item>
+			<item>
+				<link url="save_words.m">save_words.m</link> - Saves the words of the source and filter files.
+</item>
+			<item>
+				<link url="sig_chunks.m">sig_chunks.m</link> - Breaks a signal into chunks.
+</item>
+			<item>
+				<link url="split_sig.m">split_sig.m</link> - Splits the signal in half.
+</item>
+		</list><para id="details">
+For more details, consult the comments in each code file.
+</para>
+	</content>
+</document>

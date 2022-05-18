@@ -1,0 +1,234 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Linear Predictive Coding in Voice Conversion</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>1c19eb40-ae6a-4cb5-be91-211286a7deac</md:uuid>
+</metadata>
+
+  <content>
+<section id="intro">
+<title> Background on Linear Predictive Coding </title>
+<para id="para1">
+<term>Linear Predictive Coding</term> (or “LPC”) is a method of predicting a sample of a speech signal based on several previous samples.  Similar to the method employed by the <link document="m12469">cepstrum</link>, we can use the LPC coefficients to separate a speech signal into two parts: the transfer function (which contains the vocal quality) and the <term>excitation</term> (which contains the pitch and the sound).  The method of looking at speech as two parts which can be separated is known as the <link document="m12470"> Source Filter Model of Speech</link>.
+</para>
+
+<para id="para1a">
+We can predict that the nth sample in a sequence of speech samples is represented by the weighted sum of the p previous samples:
+</para>
+
+<para id="equation1">
+<m:math display="block">
+ <m:semantics>
+  <m:mrow>
+   <m:mover accent="true">
+    <m:mi>s</m:mi>
+    <m:mo>^</m:mo>
+   </m:mover>
+   <m:mo>=</m:mo><m:mstyle displaystyle="true">
+    <m:munderover>
+     <m:mo>∑</m:mo>
+     <m:mrow>
+      <m:mi>k</m:mi><m:mo>=</m:mo><m:mn>1</m:mn>
+     </m:mrow>
+     <m:mi>p</m:mi>
+    </m:munderover>
+    <m:mrow>
+     <m:msub>
+      <m:mi>a</m:mi>
+      <m:mi>k</m:mi>
+     </m:msub>
+     <m:mi>s</m:mi><m:mo stretchy="false">[</m:mo><m:mi>n</m:mi><m:mo>−</m:mo><m:mi>k</m:mi><m:mo stretchy="false">]</m:mo>
+    </m:mrow>
+   </m:mstyle>
+  </m:mrow>
+ <m:annotation encoding="MathType-MTEF">
+ </m:annotation>
+ </m:semantics>
+</m:math>
+
+</para>
+
+
+
+<para id="para2">
+The number of samples (p) is referred to as the “order” of the LPC.  As p approaches infinity, we should be able to predict the nth sample exactly.  However, p is usually on the order of ten to twenty, where it can provide an accurate enough representation with a limited cost of computation.  The weights on the previous samples (ak) are chosen in order to minimize the squared error between the real sample and its predicted value.  Thus, we want the error signal e(n), which is sometimes referred to as the LPC residual, to be as small as possible:
+</para>
+
+<para id="equation2">
+<m:math display="block">
+ <m:semantics>
+  <m:mrow>
+   <m:mi>e</m:mi><m:mo stretchy="false">[</m:mo><m:mi>n</m:mi><m:mo stretchy="false">]</m:mo><m:mo>=</m:mo><m:mi>s</m:mi><m:mo stretchy="false">[</m:mo><m:mi>n</m:mi><m:mo stretchy="false">]</m:mo><m:mo>−</m:mo><m:mover accent="true">
+    <m:mi>s</m:mi>
+    <m:mo>^</m:mo>
+   </m:mover>
+   <m:mo stretchy="false">[</m:mo><m:mi>n</m:mi><m:mo stretchy="false">]</m:mo><m:mo>=</m:mo><m:mi>s</m:mi><m:mo stretchy="false">[</m:mo><m:mi>n</m:mi><m:mo stretchy="false">]</m:mo><m:mo>−</m:mo><m:mstyle displaystyle="true">
+    <m:munderover>
+     <m:mo>∑</m:mo>
+     <m:mrow>
+      <m:mi>k</m:mi><m:mo>=</m:mo><m:mn>1</m:mn>
+     </m:mrow>
+     <m:mi>p</m:mi>
+    </m:munderover>
+    <m:mrow>
+     <m:msub>
+      <m:mi>a</m:mi>
+      <m:mi>k</m:mi>
+     </m:msub>
+     <m:mi>s</m:mi><m:mo stretchy="false">[</m:mo><m:mi>n</m:mi><m:mo>−</m:mo><m:mi>k</m:mi><m:mo stretchy="false">]</m:mo>
+    </m:mrow>
+   </m:mstyle>
+  </m:mrow>
+ <m:annotation encoding="MathType-MTEF">
+ </m:annotation>
+ </m:semantics>
+</m:math>
+</para>
+
+
+<para id="para3">	
+We can take the z-transform of the above equation:
+</para>
+
+<para id="equation3">
+<m:math display="block">
+ <m:semantics>
+  <m:mrow>
+   <m:mi>E</m:mi><m:mo stretchy="false">(</m:mo><m:mi>z</m:mi><m:mo stretchy="false">)</m:mo><m:mo>=</m:mo><m:mi>S</m:mi><m:mo stretchy="false">(</m:mo><m:mi>z</m:mi><m:mo stretchy="false">)</m:mo><m:mo>−</m:mo><m:mstyle displaystyle="true">
+    <m:munderover>
+     <m:mo>∑</m:mo>
+     <m:mrow>
+      <m:mi>k</m:mi><m:mo>=</m:mo><m:mn>1</m:mn>
+     </m:mrow>
+     <m:mi>p</m:mi>
+    </m:munderover>
+    <m:mrow>
+     <m:msub>
+      <m:mi>a</m:mi>
+      <m:mi>k</m:mi>
+     </m:msub>
+     <m:mi>S</m:mi><m:mo stretchy="false">(</m:mo><m:mi>z</m:mi><m:mo stretchy="false">)</m:mo><m:msup>
+      <m:mi>z</m:mi>
+      <m:mrow>
+       <m:mo>−</m:mo><m:mi>k</m:mi>
+      </m:mrow>
+     </m:msup>
+     <m:mo>=</m:mo><m:mi>S</m:mi><m:mo stretchy="false">(</m:mo><m:mi>z</m:mi><m:mo stretchy="false">)</m:mo><m:mrow><m:mo>[</m:mo> <m:mrow>
+      <m:mn>1</m:mn><m:mo>−</m:mo><m:mstyle displaystyle="true">
+       <m:munderover>
+        <m:mo>∑</m:mo>
+        <m:mrow>
+         <m:mi>k</m:mi><m:mo>=</m:mo><m:mn>1</m:mn>
+        </m:mrow>
+        <m:mi>p</m:mi>
+       </m:munderover>
+       <m:mrow>
+        <m:msub>
+         <m:mi>a</m:mi>
+         <m:mi>k</m:mi>
+        </m:msub>
+        <m:msup>
+         <m:mi>z</m:mi>
+         <m:mrow>
+          <m:mo>−</m:mo><m:mi>k</m:mi>
+         </m:mrow>
+        </m:msup>
+        
+       </m:mrow>
+      </m:mstyle>
+     </m:mrow> <m:mo>]</m:mo></m:mrow><m:mo>=</m:mo><m:mi>S</m:mi><m:mo stretchy="false">(</m:mo><m:mi>z</m:mi><m:mo stretchy="false">)</m:mo><m:mi>A</m:mi><m:mo stretchy="false">(</m:mo><m:mi>z</m:mi><m:mo stretchy="false">)</m:mo>
+    </m:mrow>
+   </m:mstyle>
+  </m:mrow>
+ <m:annotation encoding="MathType-MTEF">
+ </m:annotation>
+ </m:semantics>
+</m:math>
+
+</para>
+
+<para id="para4">
+Thus, we can represent the error signal E(z) as the product of our original speech signal S(z) and the transfer function A(z).  A(z) represents an all-zero digital filter, where the ak coefficients correspond to the zeros in the filter’s z-plane.  Similarly, we can represent our original speech signal S(z) as the product of the error signal E(z) and the transfer function 1 / A(z):
+</para>
+
+<para id="equation4">
+<m:math display="block">
+ <m:semantics>
+  <m:mrow>
+   <m:mi>S</m:mi><m:mo stretchy="false">(</m:mo><m:mi>z</m:mi><m:mo stretchy="false">)</m:mo><m:mo>=</m:mo><m:mfrac>
+    <m:mrow>
+     <m:mi>E</m:mi><m:mo stretchy="false">(</m:mo><m:mi>z</m:mi><m:mo stretchy="false">)</m:mo>
+    </m:mrow>
+    <m:mrow>
+     <m:mi>A</m:mi><m:mo stretchy="false">(</m:mo><m:mi>z</m:mi><m:mo stretchy="false">)</m:mo>
+    </m:mrow>
+   </m:mfrac>
+   
+  </m:mrow>
+ <m:annotation encoding="MathType-MTEF">
+ </m:annotation>
+ </m:semantics>
+</m:math>
+
+</para>
+
+<para id="para5">
+The transfer function 1/A(z) represents an all-pole digital filter, where the ak coefficients correspond to the poles in the filter’s z-plane.  Note that the roots of the A(z) polynomial must all lie within the unit circle to ensure stability of this filter.
+</para>
+<para id="para6">
+The spectrum of the error signal E(z) will have a different structure depending on whether the sound it comes from is voiced or unvoiced.  Voiced sounds are produced by vibrations of the vocal cords.  Their spectrum is periodic with some fundamental frequency (which corresponds to the pitch).  Examples of voiced sounds include all of the vowels.  Unvoiced signals, however, do not have a fundamental frequency or a harmonic structure.  Instead, they are just white noise.
+</para>  
+</section>
+
+<section id="lpcvoice">
+<title>LPC in Voice Conversion</title>
+
+<para id="para7">
+In speech processing, computing the LPC coefficients of a signal gives us its ak values.  From here, we can get the filter A(z) as described above.  A(z) is the transfer function between the original signal s[n] and the excitation component e[n].  The transfer function of a speech signal is the part dealing with the voice quality: what distinguishes one person’s voice from another.  The excitation component of a speech signal is the part dealing with the particular sounds and words that are produced.  In the time domain, the excitation and transfer function are convolved to create the output voice signal.  As shown in the figure below, we can put the original signal through the filter to get the excitation component.  Putting the excitation component through the inverse filter (1 / A(z)) gives us the original signal back.
+</para>
+
+<figure id="voice">
+<title>A Voice Conversion Algorithm</title>
+<media id="idm8087216" alt=""><image src="../../media/LPCblock.bmp" mime-type="image/bmp"/></media>
+<caption>Using Linear Predictive Coding to separate the two parts of a speech signal: transfer function and excitation.</caption>
+</figure>
+
+<para id="para8">
+We can perform voice conversion by replacing the excitation component from the given speaker with a new one.  Since we are still using the same transfer function A(z), the resulting speech sample will have the same voice quality as the original.  However, since we are using a different excitation component, the resulting speech sample will have the same sounds as the new speaker.  
+</para>
+</section>
+
+
+<section id="preemphasis">
+<title> Pre-Emphasis </title>
+<para id="emphasis-intro">
+In speech processing, a process called <term>pre-emphasis</term> is applied to the input signal before the LPC analysis.  During the reconstruction following the LPC analysis, a de-emphasis process is applied to the signal to reverse the effects of pre-emphasis.  
+</para>
+<para id="emphasis-more">
+Pre- and de- emphasis are necessary because, in the spectrum of a human speech signal, the energy in the signal decreases as the frequency increases.  Pre-emphasis increases the energy in parts of the signal by an amount inversely proportional to its frequency.  Thus, as the frequency increases, pre-emphasis raises the energy of the speech signal by an increasing amount.  This process therefore serves to flatten the signal so that the resulting spectrum consists of formants of similar heights.  (Formants are the highly visible resonances or peaks in the spectrum of the speech signal, where most of the energy is concentrated.)  The flatter spectrum allows the LPC analysis to more accurately model the speech segment.  Without pre-emphasis, the linear prediction would incorrectly focus on the lower-frequency components of speech, losing important information about certain sounds.
+</para>
+</section>
+
+<section id="references">
+<title> References </title>
+
+<para id="ref1">
+<cite><cite-title>
+Deng, Li and Douglas O”Shaughnessy. <cite><cite-title>Speech Processing: A Dynamic and Optimization-Oriented Approach. </cite-title></cite>Marcel Dekker, Inc: New York. 2003.
+</cite-title></cite></para>
+
+<para id="ref2">
+<cite><cite-title>Gold, Ben and Nelson Morgan. <cite><cite-title>Speech and Audio Signal Processing: Processing and Perception of Speech and Music.</cite-title></cite> John Wiley and Sons, Inc: New York. 2000.
+</cite-title></cite></para>
+
+<para id="ref3">
+<cite><cite-title>Lemmetty, Sami. Review of Speech Synthesis Technology. (Master’s Thesis: Helsinki University of Technology) March 1999.  <link url="http://www.acoustics.hut.fi/~slemmett/dippa/thesis.pdf">http://www.acoustics.hut.fi/~slemmett/dippa/thesis.pdf</link>.
+</cite-title></cite></para>
+
+<para id="ref4">
+<cite><cite-title>Markel, J.D. and A.H. Gray, Jr. <cite><cite-title>Linear Predition of Speech. </cite-title></cite> Springer-Verlag: Berlin. 1976.
+</cite-title></cite></para>
+
+</section>
+
+  </content>
+  
+</document>

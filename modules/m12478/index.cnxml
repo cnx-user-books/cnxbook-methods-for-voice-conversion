@@ -1,0 +1,43 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Voice Conversion Experiment and Conclusion</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>7925b1f7-2695-4935-9320-1101c412c79c</md:uuid>
+</metadata>
+
+  <content>
+<section id="introduction">
+<title>Description of Experiment</title>
+<para id="experiment1">
+To test our voice conversion algorithm, we administered a speaker identification test to twelve randomly selected people.  Prior to the experiment, we recorded speech samples from four different speakers (two male and two female) and used our algorithm to convert between various combinations of their voices.  For example, we took the sound of speaker #1 (the "source speaker") saying a certain phrase and converted it to the voice of speaker #2 (the "target speaker"). The participants listened to a series of these synthesized sounds, and we asked them to identify the speaker (the target) as well as the speaker's gender.  
+</para>
+</section>
+<section id="results">
+<title>Results of Experiment</title>
+<para id="result1">
+The target speaker was correctly identified <term>74%</term> of the time.
+</para>
+<para id="result2">
+The target speaker's gender was correctly identified <term>93%</term> of the time.
+</para>
+<figure id="graph">
+<title>Graph of Gender-specific Conversion Accuracy</title>
+<media id="idp247568" alt=""><image src="../../media/experiment.JPG" mime-type="image/jpeg"/></media>
+<caption>The first bar, "Female to Female," indicates a conversion from a female source speaker to a female target speaker was correctly identified 83% of the time.</caption>
+</figure>
+</section>
+<section id="conclusion">
+<title>Conclusions</title>
+<para id="conc1">
+Our voice conversion system was fairly effective at imitating a certain target speaker.  From the "Gender-Specific Conversion Accuracy" graph, it can be implied that our system was better at converting female source speakers than male source speakers.  One reason for this may be that the voices of the two male speakers used in the experiment had only a minor difference in pitch.  The female speakers' voices, however, had a more noticeable difference.
+</para>
+</section>
+<section id="future">
+<title>Possible Improvements</title>
+<para id="future1">
+At its current state, our system can only convert between two voices when it has samples of the speakers saying the same word or phrase.  In order to make our system text-independent, we would need to implement <term>neural mapping</term>.  This could be accomplished by using the <term>cepstrum</term> to identify certain characteristic sounds (such as vowel sounds) in the target speaker's speech sample and mapping their filters to the corresponding characteristic sounds in the source speaker's sample.  In addition to adding text-independence to our system, we could add a <term>band-pass filter</term> at the end of our system to help eradicate speech artifacts in our synthesized sounds.  The filter would block out frequencies that are not in the range of human speech.
+</para>
+</section>
+
+
+
+  </content>
+</document>

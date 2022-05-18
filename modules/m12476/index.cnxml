@@ -1,0 +1,38 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Windowing in Voice Conversion</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>04f316a0-5f37-4def-8b4f-b14882aea53f</md:uuid>
+</metadata>
+
+<content>
+<para id="intro">
+The characteristics of a speech signal vary with time. For this reason, it is difficult to process an entire phrase as tone, pitch, and other characteristics may have a very large range over the whole of the signal. Thus, it is necessary to split the phrase into many parts, or <term>window</term> the speech signal.
+</para>
+<para id="methods">
+There are many different ways to window a signal. The first, and most common, method is to split the signal into equal parts. While this may prove useful for many applications, it is not the best technique for speech processing.
+</para>
+<para id="syllable">
+Speech is composed of many strung together segments known as syllables. Since each syllable contains unique characteristics, we find it very useful to split phrases into syllables before processing the signal. Syllable extraction amounts to looking for the breaks in the speech signal. This can be accomplished by performing <term>envelope extraction</term> on the absolute value of the speech signal and comparing to a threshold.
+</para>
+<definition id="envelopeExtraction">
+<term>Envelope Extraction</term>
+<meaning id="idm6742384">
+<term>Envelope Extraction</term> is the process of obtaining the <term>evelope</term>, or general shape of, a signal.
+</meaning>
+</definition>
+<para id="envelope">
+In speech processing, the envelope can be extracted by taking the absolute value of the speech signal and subjecting it to an averager. An averager simply convolves the signal with a boxcar. The signal envelope is then compared to a threshold.
+</para>
+<para id="voiceConversion">
+This is the process we employed in our windowing algorithm. A diagram is shown below:
+</para>
+<figure id="signalEnvelope">
+<title>Speech Signal Envelope</title>
+<media id="idm369248" alt=""><image src="../../media/envelope.jpg" mime-type="image/jpeg"/></media>
+<caption>A speech signal and the envelope of its magnitude compared to a threshold.</caption>
+</figure>
+<para id="breaks">
+When the signal envelope falls below the predetermined threshold, the speech signal is assumed to have a "break" in it - the end of one syllable and the beginning of another. Thus, the signal is split and each syllable is sent to the system for processing. After processing, the windows are reassembled to obtain the results for the entire phrase.
+</para>
+</content>
+
+</document>

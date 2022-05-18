@@ -1,0 +1,34 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Changing Pitch with PSOLA for Voice Conversion</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>6c083f48-052d-451b-9dc4-697dab3c92f0</md:uuid>
+</metadata>
+
+  <content>
+    <para id="one">
+PSOLA (“Pitch-Synchronous Overlap and Add”) is a method used to manipulate the pitch of a speech signal to match it to that of the target speaker.
+</para>
+<para id="two">
+PSOLA deals with <term>diphones</term>, which are the units of speech that extend from the middle of one region of steady-state sound to the middle of the next; thus, they represent transitions between speech sounds.  Some researchers have suggested that this classification of transitions between sounds is the key element in humans understanding and recognizing segments of speech.
+</para>
+<para id="three">
+The basic algorithm for the PSOLA technique consists of three steps.  First, the speech signal is divided into separate but overlapping smaller signals.  This is accomplished by windowing segments around each “pitch mark” or peak amplitude in the original signal.  The windowed segments usually contain two to four pitch periods.  Secondly, the smaller signals are modified by either repeating or leaving out speech segments, depending on whether the pitch of the target speaker is higher or lower than the pitch of the source speaker.  This modifies the duration of the signal, therefore changing the fundamental frequency.  Lastly, the remaining smaller segments are recombined through overlapping and adding.  The result is a signal with the same spectrum as the original but with a different fundamental frequency.  Thus, the pitch changes, but the other vocal qualities remain the same.
+</para>
+<para id="four">
+The original PSOLA is now often referred to as the <term>TD-PSOLA</term>, for “time domain.”  An alternative is referred to as the <term>LP-PSOLA</term>.  Rather than storing the diphone waveforms, the LP-PSOLA stores LP (“linear predictor”) coefficients in order to represent the segment of a signal.
+    </para> 
+
+
+
+<section id="references">
+<title> References </title>
+
+<para id="ref1"><cite><cite-title>
+Gold, Ben and Nelson Morgan.  Speech and Audio Signal Processing: Processing and Perception of Speech and Music.  John Wiley and Sons, Inc: New York.  2000.
+</cite-title></cite></para>
+<para id="ref2"><cite><cite-title>
+Lemmetty, Sami.  Review of Speech Synthesis Technology.  (Master’s Thesis: Helsinki University of Technology)  March 1999.  <link url="http://www.acoustics.hut.fi/~slemmett/dippa/thesis.pdf">http://www.acoustics.hut.fi/~slemmett/dippa/thesis.pdf</link>.
+</cite-title></cite></para>
+
+</section>
+  </content>
+</document>

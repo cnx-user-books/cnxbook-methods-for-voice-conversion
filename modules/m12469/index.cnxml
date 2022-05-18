@@ -1,0 +1,193 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Cepstrum</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>b1e8eb6c-99d4-4049-87bf-051a2ae0b825</md:uuid>
+</metadata>
+
+  <content>
+    <section id="Cepstrum">
+    <title>The Cepstrum Domain</title>
+
+    <para id="Introduction">
+       <!-- Insert module text here -->
+The <term>cepstrum</term> is a common transform used to gain information from a person’s speech signal.  It can be used to separate the <term>excitation</term> signal (which contains the words and the pitch) and the transfer function (which contains the voice quality). It is similar to a channel vocoder or <link document="m12473">LPC</link> in its applications, but using the cepstrum as a spectral analyzer is a completely different process. (It is also worth pointing out that cepstrum is “spectrum” with the first syllable flipped… we will encounter several words with this naming convention.) Before describing the details of the cepstrum, a little background in speech models is needed.
+    </para>   
+
+</section>
+
+<section id="Background">
+<title>Background Information</title>
+    <para id="BackgroundInfo">
+Within human speech, there are two methods employed to form our words.  These sounds are categorized into the <term>voiced</term> and <term>unvoiced</term>.  For the voiced part, our throat acts like a transfer function. The vowel sounds are included in this category. The unvoiced part describes the “noisy” sounds of speech.  These are the sounds made with our mouth and tongue (as opposed to our throat), such as the “f” sound, the “s” sound, and the "th" sound. 
+
+This way of looking at speech as two seperable parts is known as the <link document="m12470"> Source Filter Model of Speech </link> or the Linear Separable Equivalent Circuit Model.  Mathematically, they are described in the time domain as:
+    </para>
+    
+    
+<para id="formula1">
+
+<m:math display="block">
+ <m:semantics>
+  <m:mrow>
+   <m:mi>x</m:mi><m:mo stretchy="false">(</m:mo><m:mi>t</m:mi><m:mo stretchy="false">)</m:mo><m:mo>=</m:mo><m:mstyle displaystyle="true">
+    <m:mrow><m:munderover>
+     <m:mo>∫</m:mo>
+     <m:mn>0</m:mn>
+     <m:mi>t</m:mi>
+    </m:munderover>
+    <m:mrow>
+     <m:mi>g</m:mi><m:mo stretchy="false">(</m:mo><m:mi>τ</m:mi><m:mo stretchy="false">)</m:mo><m:mi>h</m:mi><m:mo stretchy="false">(</m:mo><m:mi>t</m:mi><m:mo>−</m:mo><m:mi>τ</m:mi><m:mo stretchy="false">)</m:mo><m:mi>d</m:mi><m:mi>τ</m:mi>
+    </m:mrow>
+   </m:mrow>
+   
+  </m:mstyle>
+ </m:mrow>
+<m:annotation encoding="MathType-MTEF">
+</m:annotation>
+</m:semantics>
+</m:math>
+
+
+</para>
+
+
+<para id="frequency">
+Since convolution in the time domain is multiplication in the frequency domain, this become:
+</para>
+
+
+
+<para id="formula2">
+ <m:math display="block">
+ <m:semantics>
+  <m:mrow>
+   <m:mi>X</m:mi><m:mo stretchy="false">(</m:mo><m:mi>ω</m:mi><m:mo stretchy="false">)</m:mo><m:mo>=</m:mo><m:mi>G</m:mi><m:mo stretchy="false">(</m:mo><m:mi>ω</m:mi><m:mo stretchy="false">)</m:mo><m:mi>H</m:mi><m:mo stretchy="false">(</m:mo><m:mi>ω</m:mi><m:mo stretchy="false">)</m:mo>
+  </m:mrow>
+ <m:annotation encoding="MathType-MTEF">
+ </m:annotation>
+ </m:semantics>
+</m:math>
+
+</para>
+
+
+ 
+<para id="log">
+
+There is a mathematical process with which we are familiar that can separate two multiplied variables.  If we take the log of the magnitude of both sides of this transform, we reach:
+</para>
+
+<para id="formula3">
+<m:math display="block">
+ <m:semantics>
+  <m:mrow>
+   <m:mi>log</m:mi><m:mo>⁡</m:mo><m:mrow><m:mo>|</m:mo> <m:mrow>
+    <m:mi>X</m:mi><m:mo stretchy="false">(</m:mo><m:mi>ω</m:mi><m:mo stretchy="false">)</m:mo>
+   </m:mrow> <m:mo>|</m:mo></m:mrow><m:mo>=</m:mo><m:mi>log</m:mi><m:mo>⁡</m:mo><m:mrow><m:mo>|</m:mo> <m:mrow>
+    <m:mi>G</m:mi><m:mo stretchy="false">(</m:mo><m:mi>ω</m:mi><m:mo stretchy="false">)</m:mo>
+   </m:mrow> <m:mo>|</m:mo></m:mrow><m:mo>+</m:mo><m:mi>log</m:mi><m:mo>⁡</m:mo><m:mrow><m:mo>|</m:mo> <m:mrow>
+    <m:mi>H</m:mi><m:mo stretchy="false">(</m:mo><m:mi>ω</m:mi><m:mo stretchy="false">)</m:mo>
+   </m:mrow> <m:mo>|</m:mo></m:mrow>
+  </m:mrow>
+ <m:annotation encoding="MathType-MTEF">
+ </m:annotation>
+ </m:semantics>
+</m:math>
+
+</para>
+
+
+
+
+<para id="FinalStep">
+
+Computing the inverse Fourier Transform of this equation brings us into the realm of "quefrency."
+</para>
+<para id="formula4">
+<m:math display="block">
+ <m:semantics>
+  <m:mrow>
+   <m:msup>
+    <m:mi>F</m:mi>
+    <m:mrow>
+     <m:mo>−</m:mo><m:mn>1</m:mn>
+    </m:mrow>
+   </m:msup>
+   <m:mi>log</m:mi><m:mo>⁡</m:mo><m:mrow><m:mo>|</m:mo> <m:mrow>
+    <m:mi>X</m:mi><m:mo stretchy="false">(</m:mo><m:mi>ω</m:mi><m:mo stretchy="false">)</m:mo>
+   </m:mrow> <m:mo>|</m:mo></m:mrow><m:mo>=</m:mo><m:msup>
+    <m:mi>F</m:mi>
+    <m:mrow>
+     <m:mo>−</m:mo><m:mn>1</m:mn>
+    </m:mrow>
+   </m:msup>
+   <m:mi>log</m:mi><m:mo>⁡</m:mo><m:mrow><m:mo>|</m:mo> <m:mrow>
+    <m:mi>G</m:mi><m:mo stretchy="false">(</m:mo><m:mi>ω</m:mi><m:mo stretchy="false">)</m:mo>
+   </m:mrow> <m:mo>|</m:mo></m:mrow><m:mo>+</m:mo><m:msup>
+    <m:mi>F</m:mi>
+    <m:mrow>
+     <m:mo>−</m:mo><m:mn>1</m:mn>
+    </m:mrow>
+   </m:msup>
+   <m:mi>log</m:mi><m:mo>⁡</m:mo><m:mrow><m:mo>|</m:mo> <m:mrow>
+    <m:mi>H</m:mi><m:mo stretchy="false">(</m:mo><m:mi>ω</m:mi><m:mo stretchy="false">)</m:mo>
+   </m:mrow> <m:mo>|</m:mo></m:mrow>
+  </m:mrow>
+ <m:annotation encoding="MathType-MTEF">
+ </m:annotation>
+ </m:semantics>
+</m:math>
+
+</para>
+
+
+<para id="finalStep2">
+Quefrency is the x-axis of the cepstrum.  Its units are in time.  Typically the areas of intest are from 0ms to around 10ms. See figure 1 below for the full process.
+</para>
+
+
+
+<figure id="cepstrum_block">
+<title>Cepstrum Block Diagram</title>
+<media id="idm7565984" alt=""><image src="../../media/cepstrum.jpg" mime-type="image/jpeg"/></media>
+<caption>This is the process used to compute the cepstrum</caption>
+</figure>
+
+
+ </section>
+
+<section id="Application">
+<title>The Use of the Cepstrum</title>
+<para id="application1">
+    We have now seen the process by which we calculate the cepstrum of a signal.    It is now time to dicuss some the uses of the cepstrum.  Often after having calculated the cepstrum, we will want to "lifter" the signal. (Once again the naming scheme has been used.  This time on the word filter)  When we lifter, we are seperating the <term>transfer function</term> (the spectral envelope) and the <term>excitation signal</term>.  The transfer function usually appears as a steep slant at the beginning of the plot.  The excitation appears as <term>periodic peaks</term> occurring after around 5ms.  Below we can see examples of several cepstrum plots.  Note how the female voice has peaks occurring more often then in the male’s cepstrum.  This is due to the higher pitch of a female voice.
+</para>
+
+<figure id="cepstrum_plot">
+<title>Cepstrum Samples</title>
+<media id="idm7409312" alt=""><image src="../../media/cepstrum_plot.jpg" mime-type="image/jpeg"/></media>
+<caption>These are vowel samples of a male and female.  The x-axis is in milliseconds and the y-axis is the magnitude. The sounds "aah" and "eee" for both speakers are shown.</caption>
+
+</figure>
+
+
+
+</section>
+
+
+
+
+<section id="Reference">
+<title>Reference</title>
+<para id="ref1">
+<cite><cite-title>
+Furui, Sadaoki. Digital Speech Processing, Synthesis, and Recognition. Marcel Deccer, Inc.: New York.
+</cite-title></cite>
+</para>
+
+<para id="ref2">
+<cite><cite-title>
+Gold, Ben and Nelson Morgan.  Speech and Audio Signal Processing: Processing and Perception of Speech and Music.  John Wiley and Sons, Inc: New York.  2000.
+</cite-title></cite>
+</para>
+</section>
+</content> 
+</document>

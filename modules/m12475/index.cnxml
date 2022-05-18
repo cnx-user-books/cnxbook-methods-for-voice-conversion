@@ -1,0 +1,70 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Voice Conversion in Praat</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>5a06554b-0b6e-41a3-89d1-fc0cf06a2e75</md:uuid>
+</metadata>
+
+  <content>
+<para id="one">
+The Praat Program, developed by Paul Boersma and David Weenink of the University of Amsterdam, provides several modules. The ones we were interested in were namely the LPC and pitch conversion modules. These modules can be combined to convert from a source speaker to a target.  
+</para>
+
+
+<section id="Intro">
+<title>Opening a Sound File in Praat</title>
+<para id="Introduction">
+Praat is a program that offers several different ways to process and manipulate sound files.  When a 
+sound file is opened in Praat, it is automatically converted into an “object,” which is the only type of 
+data that the program can work with.  To open a sound file, select “Read from file…” from the “Read” 
+menu.
+</para>
+</section>
+<section id="LPC">
+<title>LPC Filters</title>
+<para id="LPCBurg">
+Using Praat, it is possible to calculate the LPC filter coefficients of a sound object.  To do this, select the sound object and use the function "To LPC (burg)" under "Formants and LPC."  This function requires the following arguments:
+</para>
+<para id="Arguments1">
+<term>Prediction order</term> - The number of linear prediction coefficients.
+</para>
+<para id="Arguments2">
+<term>Analysis window duration</term> - The duration of each analysis frame, in seconds.
+</para>
+<para id="Arguments3">
+<term>Time step</term> - The time step between two consecutive analysis frames, in seconds.
+</para>
+<para id="Arguments4">
+<term>Pre-emphasis frequency</term> - A +6dB / octave filtering will be applied above this frequency (Hz).  If you do not want pre-emphasis, choose a frequency greater than the Nyquist frequency.
+</para>
+<para id="Filtering">
+This function will return an LPC object.  To filter or inversely filter a sound object with an LPC object, simply select both of them simultaneously and choose the appropriate option.  Inversely filtering a sound object with its associated LPC object will yield the excitation (or source) part of the sound.  This excitation can be filtered with a different LPC object than the one it was created with to obtain the characteristics of another sound.
+</para>
+</section>
+<section id="pitch">
+<title>Changing Pitch</title>
+<para id="Pitch1">
+Praat can also be used to extract pitch information from a sound.  To do this, a sound object must first be converted to a manipulation object through the “To Manipulation…” function.  When a sound object is converted to a manipulation object, Praat automatically calculates the sound's pitch information using the PSOLA method.  After selecting a manipulation object, the “Extract pitch tier” function can be used to obtain this pitch information.
+</para>
+<para id="Pitch2">
+A manipulation object’s pitch tier can be replaced with a separate pitch tier object.  Selecting both objects and using the “Replace pitch tier” function will accomplish this.  In order to get a sound object from a manipulation object, select “Resynthesize (LPC).”
+</para>
+</section>
+<section id="block">
+<title>Voice Conversion Algorithm</title>
+<para id="Block1">
+The preceding processes can be automated through a Praat script. The following block diagram illustrates one method of performing voice conversion in Praat:
+</para>
+<figure id="voice">
+<title>A Voice Conversion Algorithm</title>
+<media id="idp146464" alt=""><image src="../../media/ursula.png" mime-type="image/png"/></media>
+<caption>The windowing for this process is done in Matlab.  The rest of the system can be coded entirely in Praat.</caption>
+</figure>
+</section>
+<section id="references">
+<title>References</title>
+<para id="refs1">
+<cite><cite-title>Praat: Doing Phonetics by Computer. Paul Boersma and David Weenink of the
+University of Amsterdam. <link url="www.praat.org">www.praat.org</link>.</cite-title></cite>
+</para>
+</section>
+</content>
+</document>

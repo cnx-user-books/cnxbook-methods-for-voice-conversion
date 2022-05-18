@@ -1,0 +1,95 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Deconvolution Basics</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>03d40136-9e85-4edc-8a3d-bbfc498a8617</md:uuid>
+</metadata>
+
+<content>
+<section id="idp6307840">
+<title>Definition</title>
+<para id="def">
+Deconvolution is exactly what it sounds like: the undoing of convolution. This means that instead 
+of 
+mixing two signals like in convolution, we are isolating them. This is useful for analyzing the 
+characteristics of the input signal and the impulse response when only given the output of the 
+system. For example, when given a convolved signal <m:math><m:apply><m:ci type="fn">y</m:ci>
+<m:ci>t</m:ci></m:apply><m:mo>=</m:mo><m:apply><m:ci type="fn">x</m:ci><m:ci>t</m:ci>
+</m:apply><m:mo>*</m:mo><m:apply><m:ci type="fn">h</m:ci><m:ci>t</m:ci></m:apply>
+</m:math>, the system should isolate the components <m:math><m:apply>
+<m:ci type="fn">x</m:ci><m:ci>t</m:ci></m:apply></m:math> and <m:math><m:apply>
+<m:ci type="fn">h</m:ci><m:ci>t</m:ci></m:apply></m:math> so that we may study each 
+individually. An ideal deconvolution system is shown below:
+</para>
+<figure id="deconvolution">
+<title>Ideal Deconvolution System</title>
+<media id="idm10736" alt=""><image src="../../media/deconvolution.jpg" mime-type="image/jpeg"/></media>
+<caption>
+A system that performs deconvolution separates two convolved signals.
+</caption>
+</figure>
+</section>
+<section id="idp5386016">
+<title>Approach</title>
+<para id="separate">
+Instead of producing one system that outputs both the convolved signals, it will be much easier for 
+our purposes to consider separate systems that output one of the signals at a time. Thus, we 
+desire the following systems:
+</para>
+<figure id="twosystems">
+<title>Separate Systems</title>
+<media id="idp6198848" alt=""><image src="../../media/2systems.jpg" mime-type="image/jpeg"/></media>
+<caption>
+The process of deconvolution is facilitated by splitting the process into separate systems.
+</caption>
+</figure>
+<para id="introtohomomorphic">
+What it looks like each of these systems is doing is annihilating the undesired signal. This is, in 
+fact, 
+exactly correct. This system is a <term>homomorphic filter</term>.
+</para>
+<definition id="homomorphicfilter">
+<term>Homomorphic Filter</term>
+<meaning id="idp5663472">
+A <term>homomorphic filter</term> is a system which accepts a signal composed of two 
+components and returns the signal with one of the components removed.
+</meaning>
+</definition>
+<para id="method">
+A frequently applied method is to convert the convolution of two signals into a sum, and then 
+implement a homomorphic filter to remove one of the signal components. This is the basis for 
+cepstral analysis, so we will cover this later. A diagram of this method follows:
+</para>
+<figure id="cepmethod">
+<title>A Possible Deconvolution Method</title>
+<media id="idp8443328" alt=""><image src="../../media/homomorphic.jpg" mime-type="image/jpeg"/></media>
+<caption>
+This is the basic deconvolution method implemented in cepstral analysis.
+</caption>
+</figure>
+<para id="nummethods">
+The isolation of two convolved signals depends greatly on the characteristics of both signals. Thus, 
+a wide variety of deconvolution methods exist. Since this is a study on speech analysis, we will 
+cover only the deconvolution methods which focus the signals of the source filter model: the 
+excitation signal and the impulse response of the vocal tract filter.
+</para>
+</section>
+<section id="idm27088">
+<title>Deconvolution Methods for Speech Analysis</title>
+<para id="speechanalysismethods">
+A few deconvolution methods that we will use in speech analysis are:
+<list id="deconvmethods">
+<item><link document="m12469">Cepstral Analysis</link></item>
+<item><link document="m12473">Linear Predictive Coding</link></item>
+</list>
+We study the first of these in the <link document="m12469">next area covering the cepstrum</link>.
+</para>
+</section>
+<section id="idp8940208">
+<title>References</title>
+<para id="citationone">
+<cite><cite-title>Rabiner, Lawrence R, and Schafer, Ronald W. Digital Processing of Speech Signals. Bell 
+Laboratories, 1978.</cite-title></cite>
+</para>
+</section>
+
+</content>
+  </document>

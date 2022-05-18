@@ -1,0 +1,107 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>The Source Filter Model of Speech</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>6aedb34d-f3dd-4369-adf8-7aabd889a726</md:uuid>
+</metadata>
+
+<content>
+<section id="makeup">
+<title>The Make-Up of Speech</title>
+<para id="components">
+The components of speech are the <term>words</term> and the <term>voice</term>.
+</para>
+<para id="foundations">
+Every phrase is a union of these two components - they are the foundations of the spoken 
+language. One or the other does not mean much without its conterpart.  Words without voice lack 
+intonation, so they have no meaning. Voice without words is devoid of structure and cannot 
+possibly transfer information. Only the fusion of the two can claim to be such a thing as speech.
+</para>
+<para id="biology">
+In biology, the components of speech are produced in different organs. To speak, air is first 
+released over the vocal cords, which expand and contract to give the air column structure. This is 
+the biological concept of words. The words are then passed through the vocal tract where they are 
+shaped, giving 
+them intonation. This shaping of the words is the biological concept of voice. Such a biological 
+process can be easily modeled.
+</para>
+<para id="representation">
+So far, we have determined that speech is a collection of words shaped by voice.   Here, we present 
+a model of this. In this model, the words are called the <term>source</term>. Since the words 
+are modified by voice, we say the source passes through a <term>filter</term>. 
+This brings us to the <term>source filter model</term> of speech.
+</para>
+<definition id="sourcefiltermodel">
+<term>Source Filter Model</term>
+<meaning id="idp158016">
+The <term>source filter model</term> is a model of speech where the spoken 
+word is comprised of a source component originating from the vocal cords which 
+is then shaped by a filter immitating the effect of the vocal tract.
+</meaning>
+<example id="sfexample">
+<figure id="sfmodel">
+<title>The Source Filter Model</title>
+<media id="idm6786096" alt=""><image src="../../media/sfmodel.jpg" mime-type="image/jpeg"/></media>
+<caption>A simple model of speech.</caption>
+</figure>
+</example>
+</definition>
+<para id="application">
+This model has possibility for application in many different fields. We will focus on the topic of 
+signal processing here.
+</para>
+</section>
+<section id="idm7474400">
+<title>Signal Processing Considerations</title>
+<para id="system">
+The source filter model can easily be extended to signal processing. The source is simply a signal 
+<m:math><m:apply><m:ci type="fn">x</m:ci><m:ci>t</m:ci></m:apply></m:math>. This 
+signal is 
+the input to the filter and is called the <term>excitation signal</term> since it excites the vocal 
+tract. The vocal tract is a filter similar to all filters we have studied so far: it is a linear 
+time-invariant system with impulse response 
+<m:math><m:apply><m:ci type="fn">h</m:ci><m:ci>t</m:ci></m:apply></m:math>. This is 
+sometimes called the <term>transfer function</term> of speech since it is what transfers the 
+excitation signal to speech - it adds voice to words. Speech is the 
+output <m:math><m:apply><m:ci type="fn">y</m:ci><m:ci>t</m:ci></m:apply></m:math> 
+of the 
+source signal <m:math><m:apply><m:ci type="fn">x</m:ci><m:ci>t</m:ci></m:apply></m:math> 
+passed through the filter with impulse response 
+<m:math><m:apply><m:ci type="fn">h</m:ci><m:ci>t</m:ci></m:apply></m:math>. Thus, 
+the 
+output is given by <m:math><m:apply><m:ci type="fn">y</m:ci><m:ci>t</m:ci></m:apply>
+<m:mo>=</m:mo><m:apply><m:ci type="fn">x</m:ci><m:ci>t</m:ci></m:apply><m:mo>*</m:mo>
+<m:apply><m:ci type="fn">h</m:ci><m:ci>t</m:ci></m:apply></m:math>.  This is depicted 
+below:
+</para> 
+<figure id="filter">
+<title>Signal Processing Representation of the Source Filter Model</title>
+<media id="idm5944624" alt=""><image src="../../media/filter.jpg" mime-type="image/jpeg"/></media>
+<caption>
+An input x(t) to a filter with impulse response h(t) yields the convolution of the two.
+</caption>
+</figure>
+<para id="deconvolution">
+Since speech is simply a convolution of a source signal 
+<m:math><m:apply><m:ci type="fn">x</m:ci><m:ci>t</m:ci></m:apply></m:math> with a 
+filter's
+input response <m:math><m:apply><m:ci type="fn">h</m:ci><m:ci>t</m:ci></m:apply></m:math>, 
+we can analyze these signals to determine the characeristics of a speech signal 
+<m:math><m:apply><m:ci type="fn">y</m:ci><m:ci>t</m:ci></m:apply></m:math>. 
+However, we 
+must first deconvolve these signals so that they can be processed individually. This topic is 
+explored 
+in the <link document="m12472">next section covering deconvolution</link>.
+</para>
+</section>
+<section id="idp402384">
+<title>References</title>
+<para id="lecturecite">
+<cite><cite-title>Huckvale, Mark. "Lecture 8: Source-Filter Model of Speech Production." B214: Phonetic 
+Science: Acoustics of Speech and Hearing. University College London. <link url="http://www.phon.ucl.ac.uk/courses/spsci/b214/lect1-8.pdf">http://www.phon.ucl.ac.uk/courses/spsci/b214/lect1-8.pdf</link>.</cite-title></cite>
+</para>
+<para id="modelcite">
+<cite><cite-title>Johnson, Don. Connexions module m0049: <link document="m0049">Modeling the 
+Speech Signal</link>.</cite-title></cite>
+</para>
+</section>
+</content>
+</document>

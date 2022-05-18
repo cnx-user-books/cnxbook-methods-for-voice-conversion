@@ -1,0 +1,45 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Introduction to Methods for Voice Conversion</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>ba876e7e-246e-437e-b65a-4f1f951ee738</md:uuid>
+</metadata>
+
+  <content>
+    <para id="speech">
+Speech processing is currently a key focus for many researchers in the area of DSP.  In this project, we focus on the topic of <term>voice conversion</term>, which involves producing the words from one person (the “source speaker”) in the voice of another person (the “target speaker”).  
+</para>
+
+<para id="methods">
+We can do this using DSP because every person’s distinct vocal qualities are essentially caused by their vocal tract, which forms a transfer function between the input excitation and the output signal that we hear.  We can isolate this transfer function through methods such as <term>cepstral analysis</term> and <term>linear prediction coding</term>, which we describe in detail.  The second major identifier between different speakers is the pitch range of their words.  We can change the pitch through methods such as the <term>PSOLA</term>, which we also describe.
+</para>
+
+<para id="code">
+The vocal tract transfer function and pitch range are different for different sounds.  Thus, in synthesizing a phrase, we must first break the signal into smaller segments and analyze each individually.  Our windowing algorithm divides the signal based on breaks between different syllables and words.  We then use functions from the Praat program developed by Paul Boersma and David Weenink of the University of Amsterdam (<link url="www.praat.org">www.praat.org</link>) to perform the analysis and synthesis.
+</para>
+
+<para id="applications">
+Voice conversion has numerous applications, such as the areas of foreign language training and movie dubbing.  It is closely related to the process of <term>speech synthesis</term>, which usually refers to converting text into spoken language, and has many applications, especially relating to assistance for the blind and deaf.  Other areas in speech processing, such as <term>speaker verification</term>, have applications in security.  All of these different types of speech signal processing involve related methods that we investigated through this project, especially cepstral analysis, linear prediction coding, and the PSOLA method.
+</para>
+
+<list id="contents">
+<title>Project Contents</title>
+<item>Introduction</item>
+<item><link document="m12470">The Source Filter Model of Speech</link></item>
+<item><link document="m12472">Deconvolution Basics</link></item>
+<item><link document="m12469">The Cepstrum</link></item>
+<item><link document="m12473">Linear Predictive Coding</link></item>
+<item><link document="m12474">Changing Pitch with PSOLA</link></item>
+<item><link document="m12476">Signal Windowing</link></item>
+<item><link document="m12475">Using Praat</link></item>
+<item><link document="m12477">MATALB and Praat Code</link></item>
+<item><link document="m12478">Conclusion</link></item>
+</list>
+
+<figure id="demonstration">
+<title>Interactive Demonstration</title>
+<media id="idm5578000" alt=""><flash src="project_demo.swf" mime-type="application/x-shockwave-flash" height="600" width="1000"/></media>
+<caption> This comic is compliments of Brian VanOsdol.  Go here for more <link url="http://www.owlnet.rice.edu/~vanosdol/gallery/boy_dog_03.html">BoyDog Comics.</link></caption>
+    </figure>
+   
+  </content>
+  
+</document>
